@@ -456,6 +456,71 @@
     .ticket-box.history ul li:hover { background: rgba(212,201,176,0.15); }
     .ticket-box.history ul li:last-child { border-bottom: none; }
 
+    /* ── Layout principal (formulario + vista previa) ── */
+    .main-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.75rem;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+    .main-layout .ticket-box {
+      flex: 1 1 480px;
+      min-width: 0;
+      margin: 1.5rem 0;
+    }
+
+    /* ── Panel de vista previa en vivo ─────────────── */
+    .preview-panel {
+      flex: 1 1 420px;
+      min-width: 0;
+      position: sticky;
+      top: 20px;
+      margin: 1.5rem 0;
+    }
+    .preview-panel h3 {
+      text-align: center;
+      margin: 0 0 0.9rem;
+      font-family: var(--f-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .preview-panel h3::before {
+      content: '● ';
+      color: var(--accent-sage);
+      font-size: 10px;
+      vertical-align: middle;
+    }
+    .preview-frame {
+      background: var(--ivory);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border);
+      padding: 14px;
+      max-height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+    .preview-frame::-webkit-scrollbar { width: 8px; }
+    .preview-frame::-webkit-scrollbar-thumb { background: var(--champagne); border-radius: 8px; }
+    #preview-live {
+      background: white;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+      font-size: 13px;
+    }
+    #preview-live > div { padding: 16px !important; }
+
+    @media (max-width: 980px) {
+      .main-layout { flex-direction: column; }
+      .preview-panel { position: static; width: 100%; order: -1; }
+      .preview-frame { max-height: 420px; }
+    }
+
     /* ── PDF content (oculto) ───────────────────────── */
     #pdf-content {
       position: absolute;
@@ -504,6 +569,7 @@
   <img src="logo.png" alt="Chechena Shirts">
   <h2>Chechena Shirts</h2>
 </div>
+  <div class="main-layout">
   <div class="ticket-box">
     <h2 data-translate="ticketGenerator">Generador de Ticket</h2>
 
@@ -662,6 +728,14 @@
     </div>
 
     <div id="status-message"></div>
+  </div>
+
+  <div class="preview-panel">
+    <h3>Vista Previa</h3>
+    <div class="preview-frame">
+      <div id="preview-live"></div>
+    </div>
+  </div>
   </div>
 
   <div class="ticket-box history">
@@ -1142,6 +1216,12 @@
         </div>`;
     }
 
+    function actualizarVistaPrevia() {
+      const preview = document.getElementById('preview-live');
+      if (!preview) return;
+      preview.innerHTML = generarContenidoPDF();
+    }
+
     async function generarPDF() {
       const t = translations[getLang()];
       const btn = document.getElementById('btn-pdf');
@@ -1320,6 +1400,7 @@
       };
 
       localStorage.setItem(FORM_KEY, JSON.stringify(estado));
+      actualizarVistaPrevia();
     }
 
     function restaurarFormulario() {
@@ -1404,6 +1485,7 @@
       document.getElementById('nota').addEventListener('input', guardarFormulario);
 
       calcular();
+      actualizarVistaPrevia();
 
       // Indicador visual de sesión restaurada
       const saved = localStorage.getItem(FORM_KEY);
