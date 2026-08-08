@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Chechena Shirts — En mantenimiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root{
+    --bg:#05060a;
+    --cyan:#00f0ff;
+    --magenta:#ff2fd0;
+    --violet:#7b2fff;
+    --white:#f4f6ff;
+    --muted:#7c85a3;
+    --font-display:'Bebas Neue',sans-serif;
+    --font-mono:'Share Tech Mono',monospace;
+    --font-body:'Barlow',sans-serif;
+  }
+
+  html,body{
+    height:100%;
+    background:var(--bg);
+    color:var(--white);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+  }
+
+  body{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    padding:32px 16px 60px;
+  }
+
+  /* ── FONDO ── */
+  .bg-grid{
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(0,240,255,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,.07) 1px, transparent 1px);
+    background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 75%);
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, black 20%, transparent 75%);
+    z-index:0;
+  }
+  .bg-glow{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(600px 400px at 15% 10%, rgba(123,47,255,.25), transparent 60%),
+      radial-gradient(700px 500px at 85% 15%, rgba(0,240,255,.18), transparent 60%),
+      radial-gradient(900px 600px at 50% 100%, rgba(255,47,208,.12), transparent 60%);
+    z-index:0;
+  }
+  .scanlines{
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.025) 0px,
+      rgba(255,255,255,.025) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+    pointer-events:none;
+    z-index:5;
+    opacity:.5;
+  }
+
+  .content{ position:relative; z-index:1; width:100%; max-width:640px; display:flex; flex-direction:column; align-items:center; }
+
+  /* ── STATUS TAG ── */
+  .status-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 16px;
+    border:1px solid rgba(0,240,255,.4);
+    border-radius:999px;
+    background:rgba(0,240,255,.06);
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    margin-bottom:28px;
+  }
+  .status-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 8px 2px var(--cyan);
+    animation:pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1; transform:scale(1)}
+    50%{opacity:.4; transform:scale(.75)}
+  }
+
+  /* ── TITLE ── */
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.6rem, 11vw, 5rem);
+    letter-spacing:.04em;
+    text-align:center;
+    line-height:1;
+    color:var(--white);
+    text-shadow:
+      0 0 6px rgba(0,240,255,.6),
+      0 0 26px rgba(123,47,255,.45);
+    position:relative;
+  }
+  h1 .glitch-layer{
+    position:absolute; inset:0;
+    color:var(--magenta);
+    clip-path:inset(0 0 60% 0);
+    animation:glitch1 3.2s infinite linear;
+    opacity:.7;
+  }
+  h1 .glitch-layer2{
+    position:absolute; inset:0;
+    color:var(--cyan);
+    clip-path:inset(60% 0 0 0);
+    animation:glitch2 2.6s infinite linear;
+    opacity:.6;
+  }
+  @keyframes glitch1{
+    0%,89%,100%{transform:translate(0,0)}
+    90%{transform:translate(-2px,1px)}
+    92%{transform:translate(2px,-1px)}
+    94%{transform:translate(-1px,0)}
+    96%{transform:translate(1px,1px)}
+  }
+  @keyframes glitch2{
+    0%,91%,100%{transform:translate(0,0)}
+    92%{transform:translate(2px,-1px)}
+    94%{transform:translate(-2px,1px)}
+    96%{transform:translate(1px,0)}
+  }
+
+  .subtitle{
+    font-family:var(--font-mono);
+    font-size:clamp(12px,2.4vw,14px);
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:10px;
+    text-align:center;
+  }
+  .subtitle span{ color:var(--magenta); }
+
+  p.desc{
+    margin-top:20px;
+    max-width:440px;
+    text-align:center;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap{
+    width:100%;
+    max-width:380px;
+    margin-top:28px;
+  }
+  .progress-label{
+    display:flex; justify-content:space-between;
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.08em;
+    margin-bottom:6px;
+  }
+  .progress-track{
+    height:6px;
+    width:100%;
+    background:#12141c;
+    border:1px solid rgba(0,240,255,.25);
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:74%;
+    background:linear-gradient(90deg, var(--violet), var(--cyan));
+    box-shadow:0 0 12px rgba(0,240,255,.7);
+    animation:fillmove 2.4s ease-in-out infinite alternate;
+  }
+  @keyframes fillmove{
+    from{ filter:brightness(1); }
+    to{ filter:brightness(1.4); }
+  }
+
+  /* ── GAME SECTION ── */
+  .game-section{
+    margin-top:44px;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .game-title{
+    font-family:var(--font-display);
+    font-size:clamp(1.4rem,4vw,1.8rem);
+    letter-spacing:.04em;
+    color:var(--white);
+    margin-bottom:4px;
+  }
+  .game-title .hl{ color:var(--cyan); }
+  .game-hint{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.06em;
+    margin-bottom:16px;
+    text-align:center;
+  }
+
+  .game-frame{
+    position:relative;
+    border:1px solid rgba(0,240,255,.35);
+    background:
+      radial-gradient(ellipse at top, rgba(123,47,255,.12), transparent 60%),
+      #070911;
+    box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 40px rgba(0,240,255,.08), inset 0 0 40px rgba(123,47,255,.06);
+    padding:14px;
+    width:100%;
+    max-width:420px;
+  }
+  .game-hud{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--cyan);
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  .game-hud .best{ color:var(--magenta); }
+
+  canvas{
+    display:block;
+    width:100%;
+    aspect-ratio:3/4;
+    background:#03040a;
+    border:1px solid rgba(255,255,255,.06);
+    touch-action:none;
+  }
+
+  .game-overlay{
+    position:absolute;
+    inset:14px;
+    top:52px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:rgba(3,4,10,.82);
+    backdrop-filter:blur(2px);
+    gap:14px;
+    padding:20px;
+  }
+  .game-overlay.hidden{ display:none; }
+  .game-overlay h2{
+    font-family:var(--font-display);
+    font-size:1.8rem;
+    letter-spacing:.04em;
+    color:var(--white);
+  }
+  .game-overlay p{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.05em;
+    max-width:260px;
+  }
+  .btn-play{
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--bg);
+    background:linear-gradient(90deg, var(--cyan), var(--violet));
+    border:none;
+    padding:12px 26px;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:0 0 20px rgba(0,240,255,.4);
+    transition:transform .15s;
+  }
+  .btn-play:active{ transform:scale(.96); }
+
+  .controls-row{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:14px;
+  }
+  .ctrl-btn{
+    width:56px; height:56px;
+    border:1px solid rgba(0,240,255,.35);
+    background:rgba(0,240,255,.06);
+    color:var(--cyan);
+    font-size:20px;
+    display:flex;align-items:center;justify-content:center;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+  .ctrl-btn:active{ background:rgba(0,240,255,.2); }
+
+  /* ── FOOTER SOCIAL ── */
+  .footer-social{
+    margin-top:48px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .footer-social a{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .2s, border-color .2s;
+  }
+  .footer-social a:hover{ color:var(--cyan); border-color:var(--cyan); }
+
+  .footer-note{
+    margin-top:20px;
+    font-family:var(--font-mono);
+    font-size:10px;
+    color:#454b63;
+    letter-spacing:.08em;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="scanlines"></div>
+
+  <div class="content">
+
+    <div class="status-tag">
+      <span class="status-dot"></span>
+      Sistema fuera de línea
+    </div>
+
+    <h1 data-text="CHECHENA SHIRTS">
+      CHECHENA SHIRTS
+      <span class="glitch-layer" aria-hidden="true">CHECHENA SHIRTS</span>
+      <span class="glitch-layer2" aria-hidden="true">CHECHENA SHIRTS</span>
+    </h1>
+
+    <div class="subtitle">Estamos en <span>mantenimiento</span></div>
+
+    <p class="desc">
+      Le estamos metiendo mano al sitio para que la próxima vez que entres todo funcione todavía mejor.
+      Vuelve pronto — mientras tanto, entretente un rato aquí abajo.
+    </p>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Actualizando tienda</span>
+        <span>74%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <div class="game-title">MODO <span class="hl">ESPERA</span></div>
+      <div class="game-hint">Esquiva los bloques · usa ← → o toca los lados</div>
+
+      <div class="game-frame">
+        <div class="game-hud">
+          <span>SCORE <span id="score">0</span></span>
+          <span class="best">BEST <span id="best">0</span></span>
+        </div>
+
+        <div style="position:relative">
+          <canvas id="game" width="360" height="480"></canvas>
+
+          <div class="game-overlay" id="overlay">
+            <h2 id="overlay-title">¿LISTO?</h2>
+            <p id="overlay-text">Esquiva los bloques que caen. Cada segundo sobrevivido suma puntos. La velocidad sube con el tiempo.</p>
+            <button class="btn-play" id="btn-play">Jugar</button>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div class="ctrl-btn" id="btn-left">◀</div>
+          <div class="ctrl-btn" id="btn-right">▶</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-social">
+      <a href="https://wa.me/529212337934" target="_blank">WhatsApp</a>
+      <a href="https://www.instagram.com/chechena_shirts?igsh=MTkxamNydXJiNHpyYw==" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1GyQAhvMFY/" target="_blank">Facebook</a>
+      <a href="https://www.tiktok.com/@chechena_shirts?_r=1&_t=ZS-94J5Y5G7Rpd" target="_blank">TikTok</a>
+    </div>
+
+    <div class="footer-note">CHECHENA SHIRTS © · VOLVEMOS PRONTO</div>
+
+  </div>
+
+<script>
+(function(){
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const scoreEl = document.getElementById('score');
+  const bestEl  = document.getElementById('best');
+  const overlay = document.getElementById('overlay');
+  const overlayTitle = document.getElementById('overlay-title');
+  const overlayText  = document.getElementById('overlay-text');
+  const btnPlay = document.getElementById('btn-play');
+  const btnLeft = document.getElementById('btn-left');
+  const btnRight = document.getElementById('btn-right');
+
+  let best = 0;
+  let running = false;
+  let animId = null;
+
+  const player = { w: 42, h: 14, x: W/2 - 21, y: H - 34, speed: 6 };
+  let moveDir = 0; // -1, 0, 1
+  let blocks = [];
+  let spawnTimer = 0;
+  let spawnInterval = 60;
+  let fallSpeed = 3;
+  let frame = 0;
+  let score = 0;
+
+  function resetGame(){
+    player.x = W/2 - player.w/2;
+    blocks = [];
+    spawnTimer = 0;
+    spawnInterval = 60;
+    fallSpeed = 3;
+    frame = 0;
+    score = 0;
+    scoreEl.textContent = '0';
+  }
+
+  function spawnBlock(){
+    const w = 28 + Math.random()*46;
+    const x = Math.random() * (W - w);
+    blocks.push({ x, y: -20, w, h: 18 });
+  }
+
+  function update(){
+    frame++;
+
+    // mover jugador
+    player.x += moveDir * player.speed;
+    if (player.x < 0) player.x = 0;
+    if (player.x > W - player.w) player.x = W - player.w;
+
+    // dificultad progresiva
+    if (frame % 300 === 0 && spawnInterval > 22) spawnInterval -= 4;
+    if (frame % 300 === 0) fallSpeed += 0.4;
+
+    spawnTimer++;
+    if (spawnTimer >= spawnInterval){
+      spawnTimer = 0;
+      spawnBlock();
+    }
+
+    for (let i = blocks.length - 1; i >= 0; i--){
+      const b = blocks[i];
+      b.y += fallSpeed;
+
+      // colisión
+      if (
+        b.y + b.h > player.y &&
+        b.y < player.y + player.h &&
+        b.x < player.x + player.w &&
+        b.x + b.w > player.x
+      ){
+        gameOver();
+        return;
+      }
+
+      if (b.y > H){
+        blocks.splice(i, 1);
+        score += 1;
+        scoreEl.textContent = String(score);
+      }
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    // fondo grid sutil
+    ctx.strokeStyle = 'rgba(0,240,255,0.06)';
+    ctx.lineWidth = 1;
+    for (let gx = 0; gx < W; gx += 30){
+      ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,H); ctx.stroke();
+    }
+    for (let gy = 0; gy < H; gy += 30){
+      ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(W,gy); ctx.stroke();
+    }
+
+    // bloques
+    blocks.forEach(b => {
+      ctx.fillStyle = 'rgba(255,47,208,0.85)';
+      ctx.shadowColor = '#ff2fd0';
+      ctx.shadowBlur = 10;
+      ctx.fillRect(b.x, b.y, b.w, b.h);
+      ctx.shadowBlur = 0;
+    });
+
+    // jugador
+    ctx.fillStyle = '#00f0ff';
+    ctx.shadowColor = '#00f0ff';
+    ctx.shadowBlur = 14;
+    ctx.fillRect(player.x, player.y, player.w, player.h);
+    ctx.shadowBlur = 0;
+  }
+
+  function loop(){
+    if (!running) return;
+    update();
+    if (!running) return;
+    draw();
+    animId = requestAnimationFrame(loop);
+  }
+
+  function startGame(){
+    resetGame();
+    running = true;
+    overlay.classList.add('hidden');
+    animId = requestAnimationFrame(loop);
+  }
+
+  function gameOver(){
+    running = false;
+    cancelAnimationFrame(animId);
+    if (score > best){
+      best = score;
+      bestEl.textContent = String(best);
+    }
+    overlayTitle.textContent = 'PERDISTE';
+    overlayText.textContent = 'Puntuación: ' + score + ' · Mejor: ' + best;
+    btnPlay.textContent = 'Reintentar';
+    overlay.classList.remove('hidden');
+  }
+
+  btnPlay.addEventListener('click', startGame);
+
+  // teclado
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') moveDir = -1;
+    if (e.key === 'ArrowRight') moveDir = 1;
+  });
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowLeft' && moveDir === -1) moveDir = 0;
+    if (e.key === 'ArrowRight' && moveDir === 1) moveDir = 0;
+  });
+
+  // botones táctiles
+  function bindHold(el, dir){
+    const start = (ev) => { ev.preventDefault(); moveDir = dir; };
+    const end = (ev) => { ev.preventDefault(); if (moveDir === dir) moveDir = 0; };
+    el.addEventListener('touchstart', start, {passive:false});
+    el.addEventListener('touchend', end, {passive:false});
+    el.addEventListener('mousedown', start);
+    el.addEventListener('mouseup', end);
+    el.addEventListener('mouseleave', end);
+  }
+  bindHold(btnLeft, -1);
+  bindHold(btnRight, 1);
+
+  // tocar directamente el canvas (mitad izquierda/derecha)
+  canvas.addEventListener('touchstart', (ev) => {
+    const rect = canvas.getBoundingClientRect();
+    const touchX = ev.touches[0].clientX - rect.left;
+    moveDir = touchX < rect.width/2 ? -1 : 1;
+  }, {passive:true});
+  canvas.addEventListener('touchend', () => { moveDir = 0; }, {passive:true});
+
+  draw(); // frame inicial estático
+})();
+</script>
+
+</body>
+</html>
