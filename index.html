@@ -441,6 +441,336 @@
   .megapacks-grid { grid-template-columns: 1fr; }
 }
 
+/* ══════════════════════════════════════════════════ */
+/* SUBPRODUCTOS — grid tipo tienda (shopify-like)      */
+/* ══════════════════════════════════════════════════ */
+.subproductos {
+  background: var(--black3);
+  padding: clamp(32px, 6vw, 64px) clamp(16px, 5vw, 40px);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.subproductos-header {
+  max-width: 1200px;
+  margin: 0 auto clamp(20px, 3.5vw, 32px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+.sub-head-left .megapacks-tag { margin-bottom: 6px; }
+.subproductos-header h2 {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: clamp(1.2rem, 3.6vw, 2rem);
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: .03em;
+  line-height: 1.1;
+}
+.sub-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--grey2);
+  white-space: nowrap;
+}
+
+/* filtros tipo chips (opcional, listos si se agregan más categorías) */
+.sub-filters {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sub-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: var(--black4);
+  color: var(--grey);
+  transition: .2s;
+  cursor: pointer;
+}
+.sub-chip.active, .sub-chip:hover { border-color: var(--accent); color: #fff; background: var(--accent); }
+
+.sub-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px)  { .sub-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+@media (min-width: 960px)  { .sub-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+@media (min-width: 1180px) { .sub-grid { grid-template-columns: repeat(5, 1fr); } }
+
+.sub-card {
+  background: var(--black);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 14px rgba(124,58,237,.05);
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+.sub-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 26px rgba(124,58,237,.16);
+}
+.sub-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  background: var(--black4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.sub-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.sub-card:hover .sub-media img { transform: scale(1.05); }
+.sub-icon { font-size: clamp(34px, 8vw, 48px); }
+.sub-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+.sub-body { padding: 11px 13px 14px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.sub-name {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(12.5px, 2vw, 13.5px);
+  color: var(--white);
+  line-height: 1.28;
+}
+.sub-desc {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--grey);
+  line-height: 1.45;
+}
+.sub-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.sub-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: #5c5770;
+  background: var(--black4);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+.sub-price {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(13px, 2vw, 15px);
+  color: var(--accent);
+}
+.sub-price s { color: var(--grey2); font-weight: 400; font-size: 11px; margin-left: 6px; text-decoration: line-through; }
+.sub-buy {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  transition: background .18s;
+  text-decoration: none;
+  width: 100%;
+}
+.sub-buy:hover { background: var(--accent2); }
+.sub-buy svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ─── PÁGINA DE PRODUCTO (subproductos) ─── */
+.subp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(26,22,37,.55);
+  display: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.subp-overlay.open { display: block; }
+.subp-page {
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 100%;
+  background: var(--black3);
+  box-shadow: -8px 0 40px rgba(0,0,0,.15), 8px 0 40px rgba(0,0,0,.15);
+}
+.subp-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+.subp-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--grey);
+  background: transparent;
+  padding: 8px 10px;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+}
+.subp-back:hover { color: var(--white); border-color: var(--accent); }
+.subp-back svg { width: 14px; height: 14px; }
+.subp-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.subp-media {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background: var(--black4);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.subp-media .sub-icon { font-size: clamp(52px, 16vw, 76px); }
+.subp-media img { width: 100%; height: 100%; object-fit: cover; }
+.subp-media .subp-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.subp-body { padding: 22px 18px 48px; }
+.subp-name {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: clamp(20px, 5vw, 28px);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.12;
+  margin-bottom: 8px;
+  letter-spacing: .02em;
+}
+.subp-price {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.subp-price s { color: var(--grey2); font-weight: 400; font-size: 12px; margin-left: 8px; text-decoration: line-through; }
+.subp-desc { color: var(--grey); font-size: 14px; line-height: 1.7; margin-bottom: 4px; }
+.subp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.subp-tags .sub-tag { font-size: 10.5px; padding: 4px 9px; }
+.subp-block {
+  margin: 22px 0 0;
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  background: var(--black);
+  padding: 16px;
+}
+.subp-block h3 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.subp-block p { font-size: 13px; color: var(--grey); line-height: 1.65; }
+.subp-pay-btn {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 15px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .2s;
+}
+.subp-pay-btn:hover { background: var(--accent2); }
+.subp-pay-btn svg { width: 15px; height: 15px; }
+.subp-wa-btn {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 13px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: filter .2s;
+}
+.subp-wa-btn:hover { filter: brightness(.94); }
+.subp-wa-btn svg { width: 16px; height: 16px; }
+
 .divider { display: flex; align-items: center; gap: 14px; margin-bottom: 36px; }
 .divider span { flex: 1; height: 1px; background: var(--border); }
 .divider p { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
@@ -1446,6 +1776,7 @@ h1, h2, h3, h4 { font-family: var(--font-ui); font-weight: 800; }
 <div class="nav-links-row">
   <a href="#" class="active" style="border-bottom:2px solid var(--accent2);">HOME</a>
   <a href="#megapacks" style="border-bottom:2px solid #7c3aed;">MEGAPACKS</a>
+  <a href="#subproductos">OTROS PRODUCTOS</a>
   <a href="#tiktok-videos" style="border-bottom:2px solid #22c55e;">TIKTOKS</a>
 <a href="herramientas.html" class="nav-link" style="background:linear-gradient(135deg, #f5d576, #d4af37 45%, #a8791f); color:#1a1000 !important; font-weight:800; border-radius:4px; margin:6px 4px; padding:10px 16px; box-shadow:0 0 12px rgba(212,175,55,0.5); border:1px solid #f0dca0;">HERRAMIENTAS</a>
 <a href="GUIA.html" class="nav-link" style="border-bottom:2px solid #38bdf8;">GUIAS</a>
@@ -1458,6 +1789,7 @@ h1, h2, h3, h4 { font-family: var(--font-ui); font-weight: 800; }
 <div class="mobile-nav" id="mob-nav">
   <a href="#" onclick="closeMob()">HOME</a>
   <a href="#megapacks" onclick="closeMob()">MEGAPACKS</a>
+  <a href="#subproductos" onclick="closeMob()">OTROS PRODUCTOS</a>
   <a href="#tiktok-videos" onclick="closeMob()">TIKTOKS</a>
 
   <a href="herramientas.html" onclick="closeMob()">HERRAMIENTAS</a>
@@ -1643,6 +1975,127 @@ h1, h2, h3, h4 { font-family: var(--font-ui); font-weight: 800; }
 
   </div>
 </section>
+<section id="subproductos" class="subproductos">
+
+  <div class="subproductos-header">
+    <div class="sub-head-left">
+      <span class="megapacks-tag">🛠️ Extras para tu negocio</span>
+      <h2>OTROS PRODUCTOS</h2>
+    </div>
+    <span class="sub-count" id="sub-count">4 productos</span>
+  </div>
+
+  <!-- Filtros — opcional. Si solo tienes 1 categoría puedes borrar este bloque -->
+  <div class="sub-filters">
+    <span class="sub-chip active">Todos</span>
+    <span class="sub-chip">Programas</span>
+    <span class="sub-chip">Semitonos</span>
+    <span class="sub-chip">Acciones</span>
+  </div>
+
+  <div class="sub-grid">
+
+    <!-- SUBPRODUCTO 1 (data-index = 0) -->
+    <div class="sub-card">
+<div class="sub-media">
+  <span class="sub-badge">Nuevo</span>
+  <img src="photoshop.jpg" alt="Photoshop" class="sub-icon">
+</div>
+      <div class="sub-body">
+        <h3 class="sub-name">Photoshop</h3>
+        <p class="sub-desc">Edita, crea y mejora tus diseños profesionales con Photoshop.</p>
+        <div class="sub-tags">
+          <span class="sub-tag">Software</span>
+        </div>
+        <div class="sub-price">$ 150 MXN <s>$ 350 MXN</s></div>
+        <button type="button" class="sub-buy" data-index="0">
+          MÁS INFORMACIÓN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- SUBPRODUCTO 2 (data-index = 1) -->
+    <div class="sub-card">
+<div class="sub-media">
+  <span class="sub-badge">Popular</span>
+  <img src="vectormagic.png" alt="Vector Magic" class="sub-icon">
+</div>
+      <div class="sub-body">
+        <h3 class="sub-name">Vector Magic</h3>
+        <p class="sub-desc">Convierte tus imágenes en vectores de forma rápida y sencilla, ideal para preparar diseños para impresión y corte.</p>
+        <div class="sub-tags">
+          <span class="sub-tag">Software</span>
+        </div>
+        <div class="sub-price">$ 100 MXN</div>
+        <button type="button" class="sub-buy" data-index="1">
+          MÁS INFORMACIÓN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- SUBPRODUCTO 3 (data-index = 2) -->
+    <div class="sub-card">
+<div class="sub-media">
+  <span class="sub-badge">Popular</span>
+  <img src="ilustrator.png" alt="Adobe Illustrator" class="sub-icon">
+</div>
+      <div class="sub-body">
+        <h3 class="sub-name">Adobe Illustrator</h3>
+        <p class="sub-desc">Crea y edita gráficos vectoriales profesionales, ideal para logotipos, diseños e ilustraciones listas para impresión.</p>
+        <div class="sub-tags">
+          <span class="sub-tag">Software</span>
+        </div>
+        <div class="sub-price">$ 100 MXN</div>
+        <button type="button" class="sub-buy" data-index="2">
+          MÁS INFORMACIÓN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- SUBPRODUCTO 4 (data-index = 3) -->
+    <div class="sub-card">
+<div class="sub-media">
+  <span class="sub-badge">Popular</span>
+  <img src="remo.png" alt="Removedor de Fondo Negro" class="sub-icon">
+</div>
+      <div class="sub-body">
+        <h3 class="sub-name">Acción Photoshop — Removedor de Fondo Negro</h3>
+        <p class="sub-desc">Elimina fondos negros de tus diseños de forma rápida y sencilla, ideal para preparar archivos para impresión, vectorización y corte.</p>
+        <div class="sub-tags">
+          <span class="sub-tag">acciones</span>
+        </div>
+        <div class="sub-price">$ 100 MXN <s>$ 199 MXN</s></div>
+        <button type="button" class="sub-buy" data-index="3">
+          MÁS INFORMACIÓN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+        <!-- SUBPRODUCTO 5 (data-index = 3) -->
+    <div class="sub-card">
+<div class="sub-media">
+  <span class="sub-badge">Popular</span>
+  <img src="semi.png" alt="Semitono" class="sub-icon">
+</div>
+      <div class="sub-body">
+        <h3 class="sub-name">Acción Photoshop — Semitono</h3>
+        <p class="sub-desc">Convierte tus diseños en semitonos de forma rápida y sencilla, ideal para serigrafía y preparar archivos para impresión con una apariencia profesional.</p>
+        <div class="sub-tags">
+          <span class="sub-tag">acciones</span>
+        </div>
+        <div class="sub-price">$ 100 MXN <s>$ 199 MXN</s></div>
+        <button type="button" class="sub-buy" data-index="4">
+          MÁS INFORMACIÓN
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- MEGAPACKS -->
 <section id="megapacks" class="megapacks">
@@ -1680,6 +2133,14 @@ h1, h2, h3, h4 { font-family: var(--font-ui); font-weight: 800; }
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SUBPRODUCTOS — programas, acciones, extras          -->
+<!-- Estilo tipo tienda (shopify-like). Cada tarjeta      -->
+<!-- .sub-card es independiente: copia/pega el bloque     -->
+<!-- para agregar más productos. El data-index del botón  -->
+<!-- debe coincidir con la posición del producto dentro    -->
+<!-- del arreglo SUBPRODUCTOS en el <script> del final.    -->
+<!-- ══════════════════════════════════════════════════ -->
 
 
 
@@ -2908,6 +3369,287 @@ function toggleFaq(btn) {
     .wa-float-text { display: none; }
   }
 </style>
+
+<script>
+/* ══════════════════════════════════════════════════ */
+/* SUBPRODUCTOS: DATOS + PÁGINA DE PRODUCTO COMPLETA    */
+/* Al tocar "MÁS INFORMACIÓN" se genera una página      */
+/* completa (con el mismo estilo del sitio) y se abre   */
+/* en una PESTAÑA NUEVA — no un panel encima de esta.   */
+/*                                                        */
+/* Edita este arreglo para cambiar cada subproducto.    */
+/* El índice (0,1,2,3...) debe coincidir con el          */
+/* data-index del botón "MÁS INFORMACIÓN" de su tarjeta. */
+/* ══════════════════════════════════════════════════ */
+const SUBPRODUCTOS = [
+  {
+    img: 'photoshop.jpg',
+    badge: 'Nuevo',
+    name: 'Photoshop',
+    price: 150,
+    oldPrice: 350,
+    desc: 'Edita, crea y mejora tus diseños profesionales con Photoshop.',
+    fullDesc: 'Licencia de Photoshop lista para instalar en tu equipo. Edita, crea y mejora tus diseños profesionales: retoque, capas, composición y todas las herramientas que necesitas para preparar tus artes antes de imprimir.',
+    includes: [
+      'Instalador + activación',
+      'Guía rápida de instalación',
+      'Soporte por WhatsApp si tienes dudas'
+    ],
+    tags: ['Software'],
+    payLink: 'https://link.mercadopago.com.mx/chechenashirts'
+  },
+
+  {
+    img: 'vectormagic.png',
+    badge: 'Popular',
+    name: 'Vector Magic',
+    price: 100,
+    oldPrice: null,
+    desc: 'Convierte tus imágenes en vectores de forma rápida y sencilla, ideal para preparar diseños para impresión y corte.',
+    fullDesc: 'Vector Magic transforma cualquier imagen o logo en un vector limpio en cuestión de segundos, ideal para preparar tus diseños antes de imprimir o mandar a corte de vinil o DTF sin perder calidad ni bordes.',
+    includes: [
+      'Instalador + activación',
+      'Guía rápida de uso',
+      'Soporte por WhatsApp si tienes dudas'
+    ],
+    tags: ['Software'],
+    payLink: 'https://link.mercadopago.com.mx/chechenashirts'
+  },
+
+  {
+    img: 'ilustrator.png',
+    badge: 'Popular',
+    name: 'Adobe Illustrator',
+    price: 100,
+    oldPrice: null,
+    desc: 'Crea y edita gráficos vectoriales profesionales, ideal para logotipos, diseños e ilustraciones listas para impresión.',
+    fullDesc: 'Licencia de Adobe Illustrator para crear y editar gráficos vectoriales profesionales: logotipos, ilustraciones y artes listos para impresión sin perder calidad al escalarlos.',
+    includes: [
+      'Instalador + activación',
+      'Guía rápida de instalación',
+      'Soporte por WhatsApp si tienes dudas'
+    ],
+    tags: ['Software'],
+    payLink: 'https://link.mercadopago.com.mx/chechenashirts'
+  },
+
+  {
+    img: 'remo.png',
+    badge: 'Popular',
+    name: 'Acción Photoshop — Removedor de Fondo Negro',
+    price: 100,
+    oldPrice: 199,
+    desc: 'Elimina fondos negros de tus diseños de forma rápida y sencilla, ideal para preparar archivos para impresión, vectorización y corte.',
+    fullDesc: 'Esta acción (.ATN) elimina automáticamente el fondo negro de tus diseños dentro de Photoshop, dejando el archivo listo para vectorizar, imprimir en DTF o mandar a corte, ahorrándote el trabajo manual de borrado.',
+    includes: [
+      'Archivo .ATN compatible con Photoshop CC 2019 en adelante',
+      'Guía en PDF paso a paso',
+      'Funciona en Windows y Mac'
+    ],
+    tags: ['Acciones'],
+    payLink: 'https://link.mercadopago.com.mx/chechenashirts'
+  },
+
+  {
+    img: 'semi.png',
+    badge: 'Popular',
+    name: 'Acción Photoshop — Semitono',
+    price: 100,
+    oldPrice: 199,
+    desc: 'Convierte tus diseños en semitonos de forma rápida y sencilla, ideal para serigrafía y preparar archivos para impresión con una apariencia profesional.',
+    fullDesc: 'Esta acción (.ATN) convierte cualquier diseño a semitonos con un clic dentro de Photoshop, ideal para serigrafía y para preparar tus archivos con un acabado profesional listo para imprimir.',
+    includes: [
+      'Archivo .ATN compatible con Photoshop CC 2019 en adelante',
+      'Guía en PDF paso a paso',
+      'Funciona en Windows y Mac'
+    ],
+    tags: ['Acciones'],
+    payLink: 'https://link.mercadopago.com.mx/chechenashirts'
+  }
+];
+const SUBP_WHATSAPP_NUMBER = '529212337934';
+
+document.addEventListener('DOMContentLoaded', initSubproductos);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  initSubproductos();
+}
+
+function initSubproductos(){
+  if (document.body.dataset.subpInit === '1') return; // evita doble inicialización
+  document.body.dataset.subpInit = '1';
+
+  document.querySelectorAll('.sub-buy').forEach(btn => {
+    btn.addEventListener('click', () => abrirPaginaProducto(Number(btn.dataset.index)));
+  });
+
+  /* filtro por categoría (chips) */
+  const chips = document.querySelectorAll('.sub-chip');
+  const cards = document.querySelectorAll('.sub-card');
+  const countEl = document.getElementById('sub-count');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      const cat = chip.textContent.trim();
+      let visible = 0;
+      cards.forEach(function(card){
+        const tags = Array.prototype.map.call(card.querySelectorAll('.sub-tag'), function(t){ return t.textContent.trim(); });
+        const match = cat === 'Todos' || tags.some(function(t){ return t.toLowerCase().includes(cat.toLowerCase()); }) || card.querySelector('.sub-name').textContent.toLowerCase().includes(cat.toLowerCase());
+        card.style.display = match ? '' : 'none';
+        if(match) visible++;
+      });
+      if(countEl) countEl.textContent = visible + (visible === 1 ? ' producto' : ' productos');
+    });
+  });
+}
+
+/* Genera una página HTML completa para el producto y la abre en pestaña nueva */
+function abrirPaginaProducto(index){
+  const p = SUBPRODUCTOS[index];
+  if(!p) return;
+
+  const imgAbs = new URL(p.img, window.location.href).href; // resuelve la ruta relativa a absoluta (la ventana se abre desde un blob)
+  const waMsg = encodeURIComponent(`Hola, tengo una duda sobre "${p.name}" ($${p.price} MXN) antes de comprarlo.`);
+  const waLink = `https://wa.me/${SUBP_WHATSAPP_NUMBER}?text=${waMsg}`;
+  const priceHTML = `$ ${p.price} MXN` + (p.oldPrice ? ` <s>$ ${p.oldPrice} MXN</s>` : '');
+  const tagsHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  const includesHTML = (p.includes || []).map(i => `<li><span class="check">✓</span>${i}</li>`).join('');
+
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${p.name} — Chechena Shirts</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --accent:#7c3aed; --accent2:#a855f7; --white:#1a1625; --grey:#6b6775; --grey2:#9a96a6;
+    --border:#ece5f7; --border2:#e2d9f2; --black4:#f2edfa; --green:#25D366;
+    --font-ui:'Syne',sans-serif; --font-body:'Space Grotesk',sans-serif; --font-mono:'Space Mono',monospace;
+  }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:var(--font-body); color:var(--white); background:#fff; }
+  a{ color:inherit; }
+  .topbar{
+    position:sticky; top:0; z-index:10; background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between;
+    padding:16px clamp(16px,5vw,40px);
+  }
+  .brand{ font-family:var(--font-ui); font-weight:800; font-size:15px; letter-spacing:.04em; text-transform:uppercase; }
+  .back-btn{
+    display:inline-flex; align-items:center; gap:6px; font-family:var(--font-body); font-weight:700;
+    font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--grey);
+    border:1px solid var(--border2); padding:9px 14px; border-radius:8px; background:none; cursor:pointer;
+  }
+  .back-btn:hover{ color:var(--white); border-color:var(--accent); }
+  .wrap{ max-width:760px; margin:0 auto; padding:clamp(24px,5vw,48px) clamp(16px,5vw,40px) 80px; }
+  .hero-media{
+    aspect-ratio:16/10; width:100%; background:var(--black4); border:1px solid var(--border);
+    border-radius:18px; display:flex; align-items:center; justify-content:center; position:relative;
+    overflow:hidden; margin-bottom:28px;
+  }
+  .hero-media .icon{ font-size:clamp(70px,18vw,120px); }
+  .hero-media img{ width:100%; height:100%; object-fit:cover; }
+  .badge{
+    position:absolute; top:16px; left:16px; background:var(--accent); color:#fff; font-family:var(--font-mono);
+    font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:6px 12px; border-radius:5px;
+  }
+  h1{
+    font-family:var(--font-ui); font-weight:800; font-size:clamp(1.7rem,5vw,2.6rem); text-transform:uppercase;
+    line-height:1.1; letter-spacing:.02em; margin-bottom:12px;
+  }
+  .price{ font-family:var(--font-mono); font-weight:700; font-size:clamp(20px,3.5vw,26px); color:var(--accent); margin-bottom:16px; }
+  .price s{ color:var(--grey2); font-weight:400; font-size:15px; margin-left:10px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+  .tag{
+    font-family:var(--font-mono); font-size:11px; color:#4a4557; background:var(--black4);
+    border:1px solid var(--border2); border-radius:6px; padding:6px 12px;
+  }
+  .short-desc{ font-size:15px; color:var(--grey); line-height:1.7; margin-bottom:32px; }
+  .block{ border:1px solid var(--border2); border-radius:16px; padding:22px clamp(18px,4vw,28px); margin-bottom:20px; background:#fff; }
+  .block h2{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:14px;
+  }
+  .block p{ font-size:14.5px; color:var(--grey); line-height:1.75; }
+  .includes-list{ list-style:none; display:flex; flex-direction:column; gap:12px; }
+  .includes-list li{ display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--white); line-height:1.5; }
+  .includes-list .check{
+    flex-shrink:0; width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; margin-top:1px;
+  }
+  .buy-block{ text-align:center; }
+  .pay-btn{
+    display:flex; align-items:center; justify-content:center; gap:10px; width:100%;
+    background:var(--accent); color:#fff; font-family:var(--font-body); font-weight:700; font-size:15px;
+    letter-spacing:.05em; text-transform:uppercase; padding:17px; border-radius:999px; text-decoration:none;
+    transition:background .2s; margin-bottom:12px;
+  }
+  .pay-btn:hover{ background:var(--accent2); }
+  .wa-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    background:var(--green); color:#fff; font-family:var(--font-body); font-weight:700; font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:14px; border-radius:999px; text-decoration:none;
+  }
+  .buy-note{ font-size:12px; color:var(--grey2); margin-top:12px; }
+  .footer-note{ text-align:center; margin-top:36px; font-family:var(--font-mono); font-size:11px; color:var(--grey2); letter-spacing:.05em; }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <button class="back-btn" onclick="window.close(); history.back();">← Volver a la tienda</button>
+    <span class="brand">Chechena Shirts</span>
+  </div>
+
+  <div class="wrap">
+
+    <div class="hero-media">
+      ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+      <img src="${imgAbs}" alt="${p.name}">
+    </div>
+
+    <h1>${p.name}</h1>
+    <div class="price">${priceHTML}</div>
+    <div class="tags">${tagsHTML}</div>
+    <p class="short-desc">${p.desc}</p>
+
+    <div class="block">
+      <h2>Descripción completa</h2>
+      <p>${p.fullDesc || p.desc}</p>
+    </div>
+
+    ${includesHTML ? `
+    <div class="block">
+      <h2>Qué incluye</h2>
+      <ul class="includes-list">${includesHTML}</ul>
+    </div>` : ''}
+
+    <div class="block buy-block">
+      <h2 style="text-align:left;">Comprar</h2>
+      <p style="margin-bottom:16px; text-align:left;">Paga de forma segura con Mercado Pago, tarjeta o transferencia. Al confirmar tu pago recibirás el producto por WhatsApp o correo, según corresponda.</p>
+      <a class="pay-btn" href="${p.payLink}" target="_blank" rel="noopener">
+        Pagar ahora — $${p.price} MXN
+      </a>
+      <a class="wa-btn" href="${waLink}" target="_blank" rel="noopener">
+        Tengo dudas antes de comprar
+      </a>
+      <p class="buy-note">⚡ Entrega digital tras confirmar el pago</p>
+    </div>
+
+    <p class="footer-note">CHECHENA SHIRTS — COATZACOALCOS, VER.</p>
+  </div>
+
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+</script>
 
 </body>
 <script src="script.js"></script>
