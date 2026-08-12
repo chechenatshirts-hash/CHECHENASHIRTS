@@ -505,6 +505,32 @@ nav .wrap{display:flex;align-items:center;width:100%;}
 .tcard-btn-s:hover{border-color:var(--cyan);color:var(--cyan);}
 .tcard-btn-s svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;}
 
+/* ════════════════════════ MEMBERSTACK — CUENTA ════════════════════════ */
+.ms-auth{display:flex;align-items:center;gap:8px;margin-left:8px;}
+.ms-btn{
+  font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.04em;
+  padding:8px 16px;border-radius:999px;text-decoration:none;cursor:pointer;
+  border:1px solid var(--border-strong);background:transparent;color:var(--text-dim);
+  transition:all .2s;
+}
+.ms-btn:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(108,99,255,.08);}
+.ms-btn-solid{
+  background:linear-gradient(135deg,#6c63ff,#b04aff);color:#fff;border:none;
+  box-shadow:0 2px 10px rgba(108,99,255,.35);
+}
+.ms-btn-solid:hover{color:#fff;filter:brightness(1.08);transform:translateY(-1px);}
+
+/* Botón "Hazte PRO" dentro de las tarjetas bloqueadas */
+.tcard-btn-pro{
+  display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;
+  background:linear-gradient(135deg,#c9a227 0%,#e8c458 50%,#c9a227 100%);
+  color:#1a1408;border-radius:999px;border:1px solid rgba(201,162,39,.5);
+  font-family:var(--f-ui);font-size:11.5px;font-weight:700;
+  text-decoration:none;padding:11px;cursor:pointer;letter-spacing:.03em;
+  transition:all .25s ease;
+}
+.tcard-btn-pro:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
 /* ════════════════════════ CONTACT ════════════════════════ */
 .contact-section{padding:80px 0;border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(108,99,255,.05) 0%,rgba(176,74,255,.04) 100%);position:relative;overflow:hidden;}
 .contact-inner{max-width:var(--container);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;}
@@ -683,6 +709,15 @@ footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:26px
       <a href="BOR.html">Gallery</a>
       <a href="#contacto">Contacto</a>
     </div>
+
+    <!-- Memberstack: cuenta -->
+    <div class="ms-auth">
+      <a href="#" data-ms-modal="login" class="ms-btn" data-ms-content="!members">Iniciar sesión</a>
+      <a href="#" data-ms-modal="signup" class="ms-btn ms-btn-solid" data-ms-content="!members">Crear cuenta</a>
+      <a href="#" data-ms-modal="profile" class="ms-btn" data-ms-content="members">Mi cuenta</a>
+      <a href="#" data-ms-action="logout" class="ms-btn" data-ms-content="members">Cerrar sesión</a>
+    </div>
+
     <button class="burger" id="burger" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </button>
@@ -1381,7 +1416,8 @@ footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:26px
           <div class="tcard-sub">Visualizador + Ajuste de diseño</div>
           <p class="tcard-desc">Encuentra tu talla y visualiza tu diseño antes de comprar.</p>
           <div class="tcard-actions">
-            <a href="Guía de Tallas PRO.html" class="tcard-btn-p">Abrir Herramienta <svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+            <a href="Guía de Tallas PRO.html" class="tcard-btn-p" data-ms-content="paid-plans">Abrir Herramienta <svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+            <a href="#" data-ms-plan:add="pln_herramientas-de-pago-b44r0ibr" class="tcard-btn-pro" data-ms-content="!paid-plans">🔒 Hazte PRO para abrir</a>
             <a href="https://www.tiktok.com/@chechena_shirts/video/7655572642111589653?is_from_webapp=1&sender_device=pc&web_id=7652820373969798663" class="tcard-btn-s" aria-disabled="true"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg>VER TUTORIAL</a>
           </div>
         </div>
@@ -1397,7 +1433,8 @@ footer{background:var(--bg-soft);border-top:1px solid var(--border);padding:26px
           <div class="tcard-sub">muestra el diseño en ambos lados al mismo tiempo</div>
           <p class="tcard-desc">Encuentra la talla ideal y visualiza tu diseño en la parte frontal y trasera antes de imprimir.</p>
           <div class="tcard-actions">
-            <a href="Guía de Tallas Doble Vista.html" class="tcard-btn-p">Abrir Herramienta <svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+            <a href="Guía de Tallas Doble Vista.html" class="tcard-btn-p" data-ms-content="paid-plans">Abrir Herramienta <svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></a>
+            <a href="#" data-ms-plan:add="pln_herramientas-de-pago-b44r0ibr" class="tcard-btn-pro" data-ms-content="!paid-plans">🔒 Hazte PRO para abrir</a>
             <a href="#" class="tcard-btn-s" aria-disabled="true"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg>Próximamente</a>
           </div>
         </div>
